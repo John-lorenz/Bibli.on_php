@@ -10,12 +10,11 @@
     <!-- Unicons -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
   </head>
-  <body>
+  <body class="fundo">
     <!-- Header -->
     <header class="header">
       <nav class="nav">
-        <a href="#" class="nav_logo">Bibli.on</a>
-
+        <img src="images/logobibli_dark.png" href="#" class="nav_logo" width=200em></img>
         <ul class="nav_items">
           <li class="nav_item">
             <a href="#" class="nav_link">Home</a>
@@ -32,10 +31,11 @@
     <!-- Home -->
     <section class="home">
       <div class="form_container">
+      
         <i class="uil uil-times form_close"></i>
         <!-- Login From -->
         <div class="form login_form">
-          <form action="">
+          <form method="post">
             <h2>Login</h2>
 
             <div class="input_box">
@@ -98,37 +98,37 @@
 session_start();
 
 if (isset($_POST['login_email']) && isset($_POST['login_senha'])) {
-    $email = $_POST['login_email'];
-    $senha = $_POST['login_senha'];
+    
 
     // Conecta ao banco de dados
     $host = '127.0.0.1';
     $usuario = 'root';
     $senha_db = 'root';
     $banco = 'biblioteca';
-    $conexao = mysqli_connect($host, $usuario, $senha_db, $banco);
+    $conexao = new mysqli($host, $usuario, $senha_db, $banco);
+
+    $email = $conexao -> real_escape_string($_POST['login_email']);
+    $senha = $conexao -> real_escape_string($_POST['login_senha']);
 
     // Verifica se houve erro na conexão
-    if (mysqli_connect_errno()) {
-        die('Erro ao conectar ao banco de dados: ' . mysqli_connect_error());
+    if ($conexao -> connect_errno) {
+        die('Erro ao conectar ao banco de dados: ' . $conexao->connect_errno);
     }
 
     // Verifica se o usuário e a senha estão corretos
     $sql = "SELECT * FROM usuarios WHERE email='$email' AND senha='$senha'";
-    $resultado = mysqli_query($conexao, $sql);
-    $num_linhas = mysqli_num_rows($resultado);
-
-    // Se o usuário e a senha estiverem corretos, redireciona-o para uma página de sucesso
-    if ($num_linhas == 1) {
+    $resultado = $conexao-> query($sql);
+    $verificaLogin = $resultado -> fetch_assoc();
+    if (!$verificaLogin) {
+        $mensagem_erro = "Usuário ou senha inválidos";
+        echo "<script>alert('$mensagem_erro')</script>";
+    } else {
         $_SESSION['email'] = $email;
         header('Location: dashboard.php');
         exit;
-    } else {
-        // Caso contrário, exibe uma mensagem de erro
-        $mensagem_erro = 'Usuário ou senha inválidos';
     }
 
     // Fecha a conexão com o banco de dados
-    mysqli_close($conexao);
+    $conexao->close();
 }
 ?>

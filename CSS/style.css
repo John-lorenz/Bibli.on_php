@@ -7,12 +7,13 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-
 a {
   text-decoration: none;
 }
-.header {
-  position: fixed;
+.subhome{
+  padding-inline: 10em;
+}
+header {
   height: 80px;
   width: 100%;
   z-index: 100;
@@ -60,7 +61,7 @@ a {
   position: relative;
   height: 100vh;
   width: 100%;
-  background-image: url("../fundo5.png");
+  
   background-size: cover;
   background-position: center;
 }
@@ -201,4 +202,8 @@ a {
   font-size: 12px;
   text-align: center;
   margin-top: 15px;
+}
+.fundo {
+  background-color: #00cd9d;
+  background-image: url("../fundo5.png");
 }
