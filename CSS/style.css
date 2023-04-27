@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
 * {
+  overflow: hidden;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -15,7 +16,8 @@ a {
 }
 header {
   height: 80px;
-  width: 100%;
+  width:
+  max-g 100%;
   z-index: 100;
   padding: 0 20px;
 }
@@ -204,6 +206,9 @@ header {
   margin-top: 15px;
 }
 .fundo {
+  position: relative; 
   background-color: #00cd9d;
   background-image: url("../fundo5.png");
+  background-repeat: no-repeat; 
+  background-size: cover; 
 }
