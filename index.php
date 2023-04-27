@@ -108,7 +108,7 @@ if (isset($_POST['login_email']) && isset($_POST['login_senha'])) {
     $conexao = new mysqli($host, $usuario, $senha_db, $banco);
 
     $email = $conexao -> real_escape_string($_POST['login_email']);
-    $senha = $conexao -> real_escape_string($_POST['login_senha']);
+    $senha = $conexao -> real_escape_string(md5($_POST['login_senha']));
 
     // Verifica se houve erro na conexão
     if ($conexao -> connect_errno) {
