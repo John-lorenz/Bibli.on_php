@@ -53,7 +53,7 @@
 		flex-direction: row-reverse;
 		align-items: center;
 		justify-content: center;
-		height: 100vh;
+
 		background-color: #f2f2f2;
 	}
 
@@ -131,14 +131,8 @@
 		background-color: #999999;
 		color: #ffffff;
 	}
-    .imagem-logo {
-			position: absolute;
-			top: 0;
-			left: 0;
-			z-index: -1;
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
+    .logo {
+
 		}
 </style>
 
@@ -151,7 +145,7 @@
 			<i class="fas fa-search"></i>
 		</div>
 	<div class="container">
-    <img class="imagem-logo" src="images/logobibli_dark.png" alt="Imagem">
+    <img class="logo" src="images/logobibli_dark.png" alt="Imagem">
 		<div class="categories">
 			<h2>Categorias</h2>
 			<ul>
