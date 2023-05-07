@@ -9,6 +9,7 @@ $conexao = new mysqli($host, $usuario, $senha_db, $banco);
 if ($conexao -> connect_errno) {
     die('Erro ao conectar ao banco de dados: ' . $conexao -> connect_errno);
 }
+$conexao->set_charset("utf8");
 
 return $conexao;
 ?>

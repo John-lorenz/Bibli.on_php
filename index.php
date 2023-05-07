@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="stylesheet" href="css/style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,27 +16,28 @@
 		<input type="submit" value="Procurar">
 	</form>
 	<?php
-	header('Content-type: text/html; charset=iso-8859-1');
 
 		if(isset($_GET['search'])) {
 			$conexao = require __DIR__ . "/bancodedados.php";
 			$termo_pesquisa = $conexao -> real_escape_string($_GET['search']);
 			$sql = "SELECT * FROM livros WHERE titulo LIKE '%$termo_pesquisa%' OR autor LIKE '%$termo_pesquisa%' OR genero LIKE '%$termo_pesquisa%';";
+		//	$sql = "SELECT * FROM `biblioteca`.`livros`";
+
 			$resultado = $conexao -> query($sql);
 
 			if($resultado && mysqli_num_rows($resultado) > 0) {
-				echo '<p>';
+				
 				while($row = mysqli_fetch_assoc($resultado)) {
-
-					echo $row['titulo'] . ' <br> ';
+			
+					echo '<form action="remover_livro.php" method="POST"><label>'. $row["titulo"] . '</label><input name="id" type="hidden" value="'.$row["id"].'"></input> <input type="image" src="./images/dot.png" width=12px></input></form><br> ';
 				}
-				echo '</p>';
+				
 			} else {
 
 				echo '<p>Nenhum livro encontrado para o termo "' . $termo_pesquisa . '".</p>';
 			}
 
-			mysqli_close($conexao);
+			$conexao -> close();
 		}
 		?>
 	</div>

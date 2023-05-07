@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -22,7 +22,7 @@
       </div>
     </div>
     
-      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" class="formLogin">
+      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="formLogin">
       
           <input type="text" name="login_email" placeholder="Email" class="bonito">
         
