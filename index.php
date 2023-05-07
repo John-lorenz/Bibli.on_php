@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="stylesheet" href="css/style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +16,8 @@
 		<input type="submit" value="Procurar">
 	</form>
 	<?php
+	header('Content-type: text/html; charset=iso-8859-1');
+
 		if(isset($_GET['search'])) {
 			$conexao = require __DIR__ . "/bancodedados.php";
 			$termo_pesquisa = $conexao -> real_escape_string($_GET['search']);
@@ -25,7 +27,8 @@
 			if($resultado && mysqli_num_rows($resultado) > 0) {
 				echo '<p>';
 				while($row = mysqli_fetch_assoc($resultado)) {
-					echo $row['titulo'] . ' , ';
+
+					echo $row['titulo'] . ' <br> ';
 				}
 				echo '</p>';
 			} else {
