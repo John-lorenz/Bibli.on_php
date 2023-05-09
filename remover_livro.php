@@ -12,7 +12,7 @@ if (!$resultado) {
 	echo'<script> alert("Erro ao remover os dados");</script>';
 	header('Location:index.php');
 } else {
-	echo'<script> if(confirm("Livro removido com sucesso") == true) { window.location.replace("index.php"); } else {window.location.replace("index.php");}</script>';
+	echo'<script> if(confirm("Livro removido com sucesso") == true) { window.location.replace("admin_pagina.php"); } else {window.location.replace("admin_pagina.php");}</script>';
 
 }
 

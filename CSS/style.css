@@ -7,14 +7,14 @@
 a {
   text-decoration: none;
 }
-#lo {
-  background-image: url("../images/fundo.png");
-  background-repeat: no-repeat;
-
+html{
+  height: 100%;
 }
 .imagem {
-  background-image: url("../images/fundo.png");
-  background-repeat: no-repeat;
+  background: rgb(82,224,255) fixed;
+  background: -moz-linear-gradient(82deg, rgba(82,224,255,1) 0%, rgba(3,38,137,1) 100%);
+  background: -webkit-linear-gradient(82deg, rgba(82,224,255,1) 0%, rgba(3,38,137,1) 100%);
+  background: linear-gradient(82deg, rgba(82,224,255,1) 0%, rgba(3,38,137,1) 100%);
   display: flex;
   justify-content: center;  
 } .bemVindo{
@@ -26,6 +26,9 @@ a {
 
 body {
   margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100%;
   padding: 0;
 }
 
@@ -53,11 +56,10 @@ h1 {
   font-size: 16px;
 }
 
-input[type="submit"] , .botao{
+.botao{
   padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
-  border-radius: 0.5rem;
   border: none;
   font-size: 16px;
   cursor: pointer;
@@ -65,7 +67,7 @@ input[type="submit"] , .botao{
   transition: 0.2s;
 }
 
-input[type="submit"]:hover , .botao:hover {
+ .botao:hover {
   background-color: #0062cc;
 }
 .criar-conta{
@@ -75,4 +77,55 @@ input[type="submit"]:hover , .botao:hover {
 }
 .criar-conta:hover{
   background-color: #a3cfff;
+}
+.cabecalho{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 2em;
+}
+
+.bloco{
+  display: block;
+  background-color: purple;
+  color: white;
+  padding: 0.2em;
+}
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pesquisa{
+  width: 100% ;
+  height: 100%;
+  padding: 0.6em;
+  font-size: 15px;
+}
+.sub{
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+}
+.display-flex{
+  display: flex;
+}
+.row-wrap{
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+}
+.lista-admin{padding-inline: 2em;}
+.a-livro{
+  padding: 0;
+  margin: 0;
+  transition: 0.4s;
+}
+.a-livro:hover{
+  filter: brightness(60%);
+}
+.nowrap{
+  white-space:  nowrap;
 }

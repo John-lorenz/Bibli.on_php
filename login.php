@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="css/style.css"/>
     <title>Login - Bibli.ON</title>
   </head>
 
-  <body class="imagem" id="lo">
+  <body class="imagem">
   <div style="display: flex; margin-top: 10em;">
     <div class="bemVindo">
       <img src="images/logobibli_dark.png" alt="">  
@@ -21,14 +21,14 @@
         <a href="problema.php" style="color: lightblue; font-weight: 100; width:fit-content;">Roubo de conta</a>
       </div>
     </div>
-    
+    <div>
       <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="formLogin">
       
           <input type="text" name="login_email" placeholder="Email" class="bonito">
         
           <input type="password" name="login_senha" placeholder="Senha" class="bonito">
           <div>
-          <input type="submit" value="Entrar" name="login">
+          <input type="submit" value="Entrar" name="login" class="botao">
           <a href="signup.php" class="botao criar-conta">Criar conta</a>
           </div>
           <?php
@@ -56,6 +56,7 @@
           }
           ?>
       </form>
+      </div>
     </div>
   </body>
 </html>

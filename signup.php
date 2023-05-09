@@ -14,14 +14,14 @@
     <h1>Entre para<br>o nosso<br>mundo mágico</h1>
     <hr style="width: 50%;">
   </div>
-  
+  <div>
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" class="formLogin"> 
     <input type="text" name="register_nome" placeholder="Nome" class="bonito">
     <br> <input type="text" name="register_email" placeholder="Email" class="bonito">
     <br> <input type="password" name="register_senha" placeholder="Senha" class="bonito"> *min 5 caracteres
     <input type="password" name="confirmar_senha" placeholder="Confirmar senha"  class="bonito">
     <div>
-    <input type="submit" value="Registrar" name="register">
+    <input type="submit" value="Registrar" name="register" class="botao">
     <a href="login.php" class="botao criar-conta">Ja tenho uma conta</a>
     </div> 
     <?php 
@@ -58,6 +58,7 @@
         } 
         ?> 
         </form>
+        </div>
         </div>
   </body>
 </html>
