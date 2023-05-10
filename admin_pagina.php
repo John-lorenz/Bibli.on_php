@@ -9,16 +9,32 @@
 </head>
 <body>
 	<header class="cabecalho">
-		<a href="index.php" class="bloco"><?php 
-			$conexao = require __DIR__ . "/bancodedados.php";
-			$sql = "SELECT titulo FROM livros";
-			$resultado = $conexao ->query($sql);
-			if ($resultado) {
-				echo mysqli_num_rows($resultado);
-			}
-		?> livros em nosso acervo</a>
+		<a href="index.php" class="bloco">
+			<?php 
+			include './assets/cabecalho.php'
+		?> 	livros em nosso acervo</a>
 		<a href="login.php">entrar/criar conta</a>
-		
+		<style>.demTable {
+			border:1px solid #b3adad;
+			border-collapse:collapse;
+			padding:5px;
+		}
+		.demTable th {
+			border:1px solid #b3adad;
+			padding:5px;
+			background: #f0f0f0;
+			color: #313030;
+		}
+		.demTable td {
+			border:1px solid #b3adad;
+			text-align:left;
+			padding:5px;
+			background: #ffffff;
+			color: #313030;
+		}
+                .sub{
+                        gap: 10em;
+                }</style>
 	</header>
 	
 
@@ -27,80 +43,58 @@
 		<a href="index.php"><img src="images/logobibli_claro.png"></a>
 		<h1> Página do admin</h1>
 		<div class="sub">
-                <form action="adicionarLivro.php" method="post">
-			
-			Adicionar um livro
-			<br>
-			<input type="text" placeholder="título do livro" name="livro_titulo">
-			<input type="text" placeholder="autor" name="livro_autor">
-			<select name="livro_genero">
-				<option value="Romance">Romance</option>
-				<option value="Aventura">Aventura</option>
-				<option value="Ficção Científica">Ficção Científica</option>
-				<option value="Poesia">Poesia</option>
-				<option value="Suspense">Suspense</option>
-				<option value="Biografia">Biografia</option>
-				<option value="História">História</option>
-				<option value="Autoajuda">Autoajuda</option>
-				<option value="Negócios e Finanças">Negócios e Finanças</option>
-			</select>
-			<input type="text" name="livroImagem" placeholder="URL da imagem">
-			<input type="submit" value="adicionar">
+                <form action="assets/adicionarLivro.php" method="post" enctype="multipart/form-data">
+				<table class='demTable'>
+                        <thead>
+                                <tr>
+                                        <th>Coluna</th>
+                                        <th>Valor</th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                        <td>&nbsp;titulo</td>
+                                        <td>&nbsp;<input type='text' name='titulo' placeholder="ex.: Orgulho e preconceito"></td>
+                                </tr>
+                                <tr>
+                                        <td>&nbsp;autor</td>
+                                        <td>&nbsp;<input type='text' name='autor' placeholder="ex.: Jane Austen"></td>
+                                </tr>
+                                <tr>
+                                        <td>&nbsp;genero</td>
+                                        <td>&nbsp;<select name='genero'>
+                                        <option value='Romance'>Romance</option>
+                                        <option value='Aventura'>Aventura</option>
+                                        <option value='Ficção Científica'>Ficção Científica</option>
+                                        <option value='Poesia'>Poesia</option>
+                                        <option value='Suspense'>Suspense</option>
+                                        <option value='Biografia'>Biografia</option>
+                                        <option value='História'>História</option>
+                                        <option value='Autoajuda'>Autoajuda</option>
+                                        <option value='Negócios e Finanças'>Negócios e Finanças</option>
+                                </select></td>
+                                </tr>
+                                <tr>
+                                        <td>&nbsp;linkImagem</td>
+                                        <td>&nbsp;<input type='file' name='linkImagem'></td>
+                                </tr>
+                        </tbody>
+                </table>
+				<input type='submit' value='Executar'>
+		</form>
 			<div style="width: 100%;">
-			Procurar um livro
-		</form><form method="get" class="display-flex">
+		<form method="get" class="display-flex">
 				<input type="text" placeholder="Pesquisa por título, autor ou gênero" name="search" class="pesquisa">
 				<input type="submit" value="Procurar" class="botao">
 			</form>
-		</div><div class="lista-admin">
+			<div class="lista-admin">
 			<?php
 
-				if(isset($_GET['search'])) {
-					$conexao = require __DIR__ . "/bancodedados.php";
-					$termo_pesquisa = $conexao -> real_escape_string($_GET['search']);
-					$sql = "SELECT * FROM livros WHERE titulo LIKE '%$termo_pesquisa%' OR autor LIKE '%$termo_pesquisa%' OR genero LIKE '%$termo_pesquisa%';";
-				//	$sql = "SELECT * FROM `biblioteca`.`livros`";
-
-					$resultado = $conexao -> query($sql);
-
-					if($resultado && mysqli_num_rows($resultado) > 0) {
-						
-						while($row = mysqli_fetch_assoc($resultado)) {
-					
-							echo '<label>'. $row["titulo"] . 
-							'</label><a href="remover_livro.php?id='.$row["id"].'"><img src="./images/dot.png" width=12px></img></a>
-							<a href="editaLivro.php?id='.$row["id"].'&titulo='.$row["titulo"].'&autor='.$row["autor"].'&genero='.$row["genero"].'&linkImagem='.$row["linkImagem"].'><img src="./images/edit-icon.png" width=12px></img></a>
-							<br> ';
-						}
-						
-					} else {
-
-						echo '<p>Nenhum livro encontrado para o termo "' . $termo_pesquisa . '".</p>';
-					}
-
-					$conexao -> close();
-				} else {
-					$conexao = require __DIR__ . "/bancodedados.php";
+				include './assets/admin-pesquisa.php';
 				
-					$sql = "SELECT * FROM livros;";
-				//	$sql = "SELECT * FROM `biblioteca`.`livros`";
-
-					$resultado = $conexao -> query($sql);
-
-					if($resultado && mysqli_num_rows($resultado) > 0) {
-						
-						while($row = mysqli_fetch_assoc($resultado)) {
-					
-							echo '<label>'. $row["titulo"] . 
-							'</label><a href="remover_livro.php?id='.$row["id"].'"><img src="./images/dot.png" width=12px></img></a>
-							<a href="editaLivro.php?id='.$row["id"].'&titulo='.$row["titulo"].'&autor='.$row["autor"].'&genero='.$row["genero"].'&linkImagem='.$row["linkImagem"].'"><img src="./images/edit-icon.png" width=12px></img></a>
-							<br> ';
-						}
-						
-					}
-				}
 			?>
 			</div>
+		</div>
 		</div>
 	</div>
 </body>

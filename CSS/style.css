@@ -122,10 +122,22 @@ h1 {
   padding: 0;
   margin: 0;
   transition: 0.4s;
+  
+  position: relative;
 }
 .a-livro:hover{
   filter: brightness(60%);
 }
+
 .nowrap{
   white-space:  nowrap;
+}
+.centro{
+  color: rgb(0, 0, 0);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  transition: 0.4s; 
 }
