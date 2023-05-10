@@ -16,7 +16,7 @@
 			if ($resultado) {
 				echo mysqli_num_rows($resultado);
 			}
-		?> livros</a>
+		?> livros em nosso acervo</a>
 		<a href="login.php">entrar/criar conta</a>
 		
 	</header>
@@ -67,9 +67,9 @@
 						
 						while($row = mysqli_fetch_assoc($resultado)) {
 					
-							echo '<div class="nowrap"><label>'. $row["titulo"] . 
-							'</label><form action="remover_livro.php" method="POST" style="width: 12px; margin: 0; padding: 0;"><input name="id" type="hidden" value="'.$row["id"].'"></input> <input type="image" src="./images/dot.png" width=12px></input></form>
-							<a href="#editaLivro"><img src="./images/edit-icon.png" width=12px></img><a></div>
+							echo '<label>'. $row["titulo"] . 
+							'</label><a href="remover_livro.php?id='.$row["id"].'"><img src="./images/dot.png" width=12px></img></a>
+							<a href="editaLivro.php?id='.$row["id"].'&titulo='.$row["titulo"].'&autor='.$row["autor"].'&genero='.$row["genero"].'&linkImagem='.$row["linkImagem"].'><img src="./images/edit-icon.png" width=12px></img></a>
 							<br> ';
 						}
 						
@@ -91,9 +91,9 @@
 						
 						while($row = mysqli_fetch_assoc($resultado)) {
 					
-							echo '<div class="nowrap"><label>'. $row["titulo"] . 
-							'</label><form action="remover_livro.php" method="POST" style="width: 12px; margin: 0; padding: 0;"><input name="id" type="hidden" value="'.$row["id"].'"></input> <input type="image" src="./images/dot.png" width=12px></input></form>
-							<a href="#editaLivro"><img src="./images/edit-icon.png" width=12px></img><a></div>
+							echo '<label>'. $row["titulo"] . 
+							'</label><a href="remover_livro.php?id='.$row["id"].'"><img src="./images/dot.png" width=12px></img></a>
+							<a href="editaLivro.php?id='.$row["id"].'&titulo='.$row["titulo"].'&autor='.$row["autor"].'&genero='.$row["genero"].'&linkImagem='.$row["linkImagem"].'"><img src="./images/edit-icon.png" width=12px></img></a>
 							<br> ';
 						}
 						
