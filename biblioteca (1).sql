@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 03-Maio-2023 às 15:10
+-- Generation Time: 11-Maio-2023 às 15:28
 -- Versão do servidor: 5.7.11
 -- PHP Version: 7.0.3
 
@@ -57,7 +57,7 @@ CREATE TABLE `livros` (
   `titulo` varchar(100) NOT NULL,
   `autor` varchar(100) NOT NULL,
   `genero` varchar(25) NOT NULL,
-  `linkImagem` varchar(30) NOT NULL
+  `linkImagem` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -65,13 +65,13 @@ CREATE TABLE `livros` (
 --
 
 INSERT INTO `livros` (`id`, `titulo`, `autor`, `genero`, `linkImagem`) VALUES
-(1, 'Orgulho e Preconceito', 'Jane Austen', 'Romance', ''),
-(13, 'Vidas Secas', 'Graciliano Ramos', 'Romance', ''),
-(14, 'O Pequeno Príncipe', 'Antoine de Saint-Exupéry', 'Romance', ''),
-(27, 'O Morro dos Ventos Uivantes', 'Emily Bronte', 'Romance', ''),
-(28, 'Razão e Sensibilidade', 'Jane Austen', 'Romance', ''),
-(29, 'Anna Karenina', 'Lev Tolstói', 'Romance', ''),
-(30, 'O Grande Gatsby', 'F. Scott Fitzgerald', 'Romance', ''),
+(1, 'Orgulho e Preconceito', 'Jane Austen', '', 'images/uploads/orgulhoreconceito.jpg'),
+(13, 'Vidas Secas', 'Graciliano Ramos', '', 'images/uploads/vidassecas.jpg'),
+(14, 'O Pequeno Príncipe', 'Antoine de Saint-Exupéry', '', 'images/uploads/opequenoprincipe.jpg'),
+(27, 'O Morro dos Ventos Uivantes', 'Emily Bronte', '', '/images/uploads/morrodosventosuivantes.jpg'),
+(28, 'Razão e Sensibilidade', 'Jane Austen', '', 'images/uploads/razaosensibilidade.jpg'),
+(29, 'Anna Karenina', 'Lev Tolstói', '', 'images/uploads/annakarienina.jpg'),
+(30, 'O Grande Gatsby', 'F. Scott Fitzgerald', '', 'images/uploads/ograndegatsby.jpg'),
 (31, 'Cem Anos de Solidão', 'Gabriel Garcia Marquez', 'Romance', ''),
 (40, 'A Letra Escarlate', 'Nathaniel Hawthorne', 'Romance', ''),
 (41, 'Madame Bovary', 'Gustave Flaubert', 'Romance', ''),
@@ -205,7 +205,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `livros`
 --
 ALTER TABLE `livros`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
