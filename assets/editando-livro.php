@@ -1,11 +1,11 @@
-<?php 
-  $conexao = require __DIR__ . "/bancodedados.php";
-  $id = $conexao -> real_escape_string($_GET['id']);
-  $titulo = $conexao -> real_escape_string( $_GET['titulo']);
-  $autor = $conexao -> real_escape_string( $_GET['autor']);
-  $genero =  $conexao -> real_escape_string($_GET['genero']);
-  $linkImagem =  $conexao -> real_escape_string($_GET['linkImagem']);
-  echo "
+<?php
+$conexao = require __DIR__ . "/bancodedados.php";
+$id = $conexao->real_escape_string($_GET['id']);
+$titulo = $conexao->real_escape_string($_GET['titulo']);
+$autor = $conexao->real_escape_string($_GET['autor']);
+$genero =  $conexao->real_escape_string($_GET['genero']);
+$linkImagem =  $conexao->real_escape_string($_GET['linkImagem']);
+echo "
 <div>
 <form  action='./assets/editar_livro.php' method='POST' enctype='multipart/form-data'>
 <table class='demTable'>
@@ -30,7 +30,7 @@
   </tr>
   <tr>
           <td>&nbsp;genero</td>
-          <td>&nbsp;<select name='livro_genero'>
+          <td>&nbsp;<select name='genero'>
           <option value='Romance'>Romance</option>
           <option value='Aventura'>Aventura</option>
           <option value='Ficção Científica'>Ficção Científica</option>
@@ -52,15 +52,14 @@
 </form>
 </div>
 <div>";
-  
 
-          
-          echo "<h2>$titulo</h2>";
-          if (!empty($linkImagem)) {
-                  echo "<img src='$linkImagem' width=250px></img>";
-          } else {
-                  echo '<div style="position: relative"><img src="./images/livro-da-vida.jpg" width="250px">
-                  <div class="centro" style="font-size:30px">'.$autor.':<br>'.$titulo.'</div></div>';
-          }
-  $conexao -> close();
-?>
+
+
+echo "<h2>$titulo</h2>";
+if (!empty($linkImagem)) {
+        echo "<img src='$linkImagem' width=250px></img>";
+} else {
+        echo '<div style="position: relative"><img src="./images/livro-da-vida.jpg" width="250px">
+                  <div class="centro" style="font-size:30px">' . $autor . ':<br>' . $titulo . '</div></div>';
+}
+$conexao->close();

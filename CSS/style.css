@@ -114,8 +114,7 @@ h1 {
 .row-wrap{
   flex-flow: row wrap;
   justify-content: center;
-  align-items: center;
-  gap: 22px;
+  gap: 0.3rem;
 }
 .lista-admin{padding-inline: 2em;}
 .a-livro{
@@ -140,4 +139,15 @@ h1 {
   transform: translate(-50%, -50%);
   opacity: 1;
   transition: 0.4s; 
+}
+.categorias-link a{
+  color: gray;
+}
+.categorias-link a{
+  text-decoration: none;
+  text-decoration: underline;
+}
+
+.label{
+    color: #888;
 }
