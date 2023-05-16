@@ -7,11 +7,12 @@ $id = $conexao->real_escape_string($_POST['id']);
 $titulo = $conexao->real_escape_string($_POST['titulo']);
 $autor = $conexao->real_escape_string($_POST['autor']);
 $genero = $conexao->real_escape_string($_POST['genero']);
+$descricao = $conexao->real_escape_string($_POST['descricao']);
 
 
 $target_dir = "../images/uploads/";
 $target_file = $target_dir . basename($_FILES["linkImagem"]["name"]);
-$linkImagem = substr($target_file, 1);
+$linkImagem = substr($target_file, 3);
 if ($target_file == $target_dir) {
 	$target_file = "";
 } else {
@@ -54,7 +55,7 @@ if (empty($titulo) || empty($autor)) {
 	die('<script>if(confirm("Os dados não podem ser vazios!!!") == true) { window.location.replace("admin_pagina.php"); } else {window.location.replace("admin_pagina.php");}</script>');
 } else {
 	// Insere os dados na tabela de usuários
-	$sql = "UPDATE `biblioteca`.`livros` SET `titulo` = '$titulo',`autor` = '$autor',`genero` = '$genero',`linkImagem` = '$linkImagem' WHERE `id`= '$id';";
+	$sql = "UPDATE `biblioteca`.`livros` SET `titulo` = '$titulo',`autor` = '$autor',`genero` = '$genero',`linkImagem` = '$linkImagem', `descricao` = '$descricao' WHERE `id`= '$id';";
 	$resultado = $conexao->query($sql);
 
 	// Verifica se houve erro na inserção

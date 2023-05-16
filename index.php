@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
@@ -9,7 +10,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Biblioteca Virtual - bibli.ON</title>
 </head>
-
 <body>
 	<header class="cabecalho">
 		<a href="index.php" class="bloco"><?php
@@ -32,11 +32,10 @@
 
 		</div>
 
-		<h1>Recomendações personalizadas</h1>
-		<div class="display-flex row-wrap" style="margin-top: 2em;">
+
 			<?php
 			include "/assets/lista-livros.php";
 			?>
-		</div>
+	
 	</div>
 </body>

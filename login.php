@@ -34,7 +34,7 @@
         </div>
         <?php
         if (isset($_POST['login'])) {
-          $conexao = require __DIR__ . "/bancodedados.php";
+          $conexao = require __DIR__ . "/assets/bancodedados.php";
 
           $email = $conexao->real_escape_string($_POST['login_email']);
           $senha = $conexao->real_escape_string(md5($_POST['login_senha']));

@@ -112,8 +112,8 @@ h1 {
   display: flex;
 }
 .row-wrap{
-  flex-flow: row wrap;
-  justify-content: center;
+  flex-flow: row wrap ;
+  justify-content: space-between ;
   gap: 0.3rem;
 }
 .lista-admin{padding-inline: 2em;}
@@ -121,7 +121,8 @@ h1 {
   padding: 0;
   margin: 0;
   transition: 0.4s;
-  
+  display: inherit;
+  height: min-content;
   position: relative;
 }
 .a-livro:hover{
@@ -150,4 +151,7 @@ h1 {
 
 .label{
     color: #888;
+}
+.livro-descricao{
+  width: 40%;
 }

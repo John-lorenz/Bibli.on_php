@@ -4,6 +4,7 @@ $id = $conexao->real_escape_string($_GET['id']);
 $titulo = $conexao->real_escape_string($_GET['titulo']);
 $autor = $conexao->real_escape_string($_GET['autor']);
 $genero =  $conexao->real_escape_string($_GET['genero']);
+$descricao =  $conexao->real_escape_string($_GET['descricao']);
 $linkImagem =  $conexao->real_escape_string($_GET['linkImagem']);
 echo "
 <div>
@@ -43,10 +44,14 @@ echo "
   </select></td>
   </tr>
   <tr>
+          <td>&nbsp;descricao</td>
+          <td>&nbsp;<textarea name='descricao' value='$descricao' maxlength='3000'>$descricao</textarea></td>
+  </tr>
+  <tr>
           <td>&nbsp;linkImagem</td>
           <td>&nbsp;<input type='file' name='linkImagem' value='$linkImagem'></td>
   </tr>
-</tbody>
+</tbody>        
 </table>
 <input type='submit' value='Executar'>
 </form>
@@ -60,6 +65,7 @@ if (!empty($linkImagem)) {
         echo "<img src='$linkImagem' width=250px></img>";
 } else {
         echo '<div style="position: relative"><img src="./images/livro-da-vida.jpg" width="250px">
-                  <div class="centro" style="font-size:30px">' . $autor . ':<br>' . $titulo . '</div></div>';
+                  <div class="centro" style="font-size:24px;">' . $autor . ':<br>' . $titulo . '</div></div>';
 }
+
 $conexao->close();

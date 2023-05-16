@@ -45,6 +45,7 @@
 		<div class="sub">
                 <form action="assets/adicionarLivro.php" method="post" enctype="multipart/form-data">
 				<table class='demTable'>
+					<h1>adicionar livro</h1>
                         <thead>
                                 <tr>
                                         <th>Coluna</th>
@@ -73,6 +74,10 @@
                                         <option value='Autoajuda'>Autoajuda</option>
                                         <option value='Negócios e Finanças'>Negócios e Finanças</option>
                                 </select></td>
+                                </tr>
+								<tr>
+                                        <td>&nbsp;descricao</td>
+                                        <td>&nbsp;<textarea type='text' name='descricao' placeholder="Max. 3000 caracteres" maxlength="3000"></textarea></td>
                                 </tr>
                                 <tr>
                                         <td>&nbsp;linkImagem</td>

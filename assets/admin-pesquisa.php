@@ -11,7 +11,7 @@
 
 			echo '<label>' . $row["titulo"] .
 				'</label><a href="./assets/remover_livro.php?id=' . $row["id"] . '"><img src="./images/dot.png" width=12px></img></a>
-							<a href="editaLivro.php?id=' . $row["id"] . '&titulo=' . $row["titulo"] . '&autor=' . $row["autor"] . '&genero=' . $row["genero"] . '&linkImagem=' . $row["linkImagem"] . '"><img src="./images/edit-icon.png" width=12px></img></a>
+							<a href="editaLivro.php?id=' . $row["id"] . '&titulo=' . $row["titulo"] . '&autor=' . $row["autor"] . '&genero=' . $row["genero"] . '&linkImagem=' . $row["linkImagem"] . '&descricao='.$row['descricao'].'"><img src="./images/edit-icon.png" width=12px></img></a>
 							<br> ';
 		}
 	} else {
@@ -33,7 +33,7 @@
 
 			echo '<label>' . $row["titulo"] .
 				'</label><a href="./assets/remover_livro.php?id=' . $row["id"] . '&img=' . $row["linkImagem"] . '"><img src="./images/dot.png" width=12px></img></a>
-							<a href="editaLivro.php?id=' . $row["id"] . '&titulo=' . $row["titulo"] . '&autor=' . $row["autor"] . '&genero=' . $row["genero"] . '&linkImagem=' . $row["linkImagem"] . '"><img src="./images/edit-icon.png" width=12px></img></a>
+							<a href="editaLivro.php?id=' . $row["id"] . '&titulo=' . $row["titulo"] . '&autor=' . $row["autor"] . '&genero=' . $row["genero"] . '&linkImagem=' . $row["linkImagem"] . '&descricao='.$row['descricao'].'"><img src="./images/edit-icon.png" width=12px></img></a>
 							<br> ';
 		}
 	}

@@ -24,11 +24,11 @@
                 <input type="password" name="confirmar_senha" placeholder="Confirmar senha" class="bonito">
                 <div>
                     <input type="submit" value="Registrar" name="register" class="botao">
-                    <a href="login.php" class="botao criar-conta">Ja tenho uma conta</a>
+                    <a href="login.php" class="botao criar-conta">Já tenho uma conta</a>
                 </div>
                 <?php
                 if (isset($_POST['register'])) {
-                    $conexao = require __DIR__ . "/bancodedados.php";
+                    $conexao = require __DIR__ . "/assets/bancodedados.php";
                     if (empty($_POST["register_nome"])) {
                         die("Nome de usuário necessário");
                     }

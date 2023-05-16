@@ -30,16 +30,17 @@
 			$titulo = $conexao->real_escape_string($_GET['titulo']);
 			$autor = $conexao->real_escape_string($_GET['autor']);
 			$genero =  $conexao->real_escape_string($_GET['genero']);
+			$descricao =  $conexao->real_escape_string($_GET['descricao']);
 			$linkImagem =  $conexao->real_escape_string($_GET['linkImagem']);
 
 
-			echo'<div class="display-flex row-wrap">';
+			echo'<div class="display-flex row-wrap" >';
 			if (!empty($linkImagem)) {
 				echo "<img src='$linkImagem' width=250px></img>";
 			} else {
 				echo '<div style="position: relative">
 				      <img src="./images/livro-da-vida.jpg" width="250em">
-				      <div class="centro" style="font-size:30px">' . $autor . ':<br>' . $titulo . '</div>
+				      <div class="centro" style="font-size:22px">' . $autor . ':<br>' . $titulo . '</div>
 				      </div>';
 			}
 			echo "	
@@ -56,6 +57,7 @@
 					<a href='index.php?search=$autor'>$autor</a>
 					</span>
 					</div>
+					<p>$descricao</p>
 					</div>
 					
 					</div>

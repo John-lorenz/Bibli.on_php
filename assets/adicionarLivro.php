@@ -6,12 +6,13 @@ $conexao = require __DIR__ . "/bancodedados.php";
 $titulo = $conexao->real_escape_string($_POST['titulo']);
 $autor = $conexao->real_escape_string($_POST['autor']);
 $genero = $conexao->real_escape_string($_POST['genero']);
+$descricao = $conexao->real_escape_string($_POST['descricao']);
 
 
 
 $target_dir = "../images/uploads/";
 $target_file = $target_dir . basename($_FILES["linkImagem"]["name"]);
-$uploadOk = 1;
+$linkImagem = substr($target_file, 3);
 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
 // Check if image file is a actual image or fake image
@@ -55,7 +56,7 @@ if (empty($titulo) || empty($autor)) {
   die('<script>if(confirm("Os dados não podem ser vazios!!!") == true) { window.location.replace("../admin_pagina.php"); } else {window.location.replace("../admin_pagina.php");}</script>');
 }
 // Insere os dados na tabela de usuários
-$sql = "INSERT INTO `biblioteca`.`livros` (`titulo`,`autor`,`genero`,`linkImagem`) VALUES ('" . $titulo . "', '" . $autor . "','" . $genero . "','" . $target_file . "')";
+$sql = "INSERT INTO `biblioteca`.`livros` (`titulo`,`autor`,`genero`,`linkImagem`,`descricao`) VALUES ('$titulo', '$autor','$genero','$linkImagem','$descricao')";
 $resultado = $conexao->query($sql);
 
 // Verifica se houve erro na inserção
