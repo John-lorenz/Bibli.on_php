@@ -13,10 +13,7 @@ $descricao = $conexao->real_escape_string($_POST['descricao']);
 $target_dir = "../images/uploads/";
 $target_file = $target_dir . basename($_FILES["linkImagem"]["name"]);
 $linkImagem = substr($target_file, 3);
-if ($target_file == $target_dir) {
-	$target_file = "";
-} else {
-	$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
 	// Check if image file is a actual image or fake image
 	if (isset($_POST["submit"])) {
@@ -50,7 +47,6 @@ if ($target_file == $target_dir) {
 			die("Sorry, there was an error uploading your file.");
 		}
 	}
-}
 if (empty($titulo) || empty($autor)) {
 	die('<script>if(confirm("Os dados não podem ser vazios!!!") == true) { window.location.replace("admin_pagina.php"); } else {window.location.replace("admin_pagina.php");}</script>');
 } else {
