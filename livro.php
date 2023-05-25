@@ -27,14 +27,22 @@
 
 			$conexao = require __DIR__ . "/assets/bancodedados.php";
 			$id = $conexao->real_escape_string($_GET['id']);
-			$titulo = $conexao->real_escape_string($_GET['titulo']);
-			$autor = $conexao->real_escape_string($_GET['autor']);
-			$genero =  $conexao->real_escape_string($_GET['genero']);
-			$descricao =  $conexao->real_escape_string($_GET['descricao']);
-			$linkImagem =  $conexao->real_escape_string($_GET['linkImagem']);
+			$sql = "SELECT * FROM livros WHERE id = $id";
+			$resultado = $conexao -> query($sql);
+			$row = mysqli_fetch_assoc($resultado);
 
+			$titulo = $conexao->real_escape_string($row['titulo']);
+			$autor = $conexao->real_escape_string($row['autor']);
+			$genero =  $conexao->real_escape_string($row['genero']);
+			$descricao =  $conexao->real_escape_string($row['descricao']);
+			$linkImagem =  $conexao->real_escape_string($row['linkImagem']);
 
-			echo'<div class="display-flex row-wrap" >';
+			$conexao->close();
+			?>
+
+			
+				<div class="display-flex justify-content-center">
+			<?php 
 			if (!empty($linkImagem)) {
 				echo "<img src='$linkImagem' width=250px></img>";
 			} else {
@@ -43,31 +51,23 @@
 				      <div class="centro" style="font-size:22px">' . $autor . ':<br>' . $titulo . '</div>
 				      </div>';
 			}
-			echo "	
-			      		<div class='livro-descricao'>
-						<h2>$titulo</h2>
+			?>
+			    <div class='livro-descricao'>
+					<h2><?php echo$titulo ?></h2>
 						<div class='display-flex'>
-						<span class='label'>
-							<div class='label'>Categoria:</div>
-							<div class='label'>autor:</div>
-						</span>
+						
 						<span class='categorias-link'>
-					<a href='index.php?search=$genero'>$genero</a>
-					<br>
-					<a href='index.php?search=$autor'>$autor</a>
-					</span>
+							<?php echo "<a href='index.php?search=$autor'> $autor </a>" ?>
+							<br>
+							<?php echo "<a href='index.php?search=$genero'> $genero </a>" ?>
+						</span>
 					</div>
-					<p>$descricao</p>
+					<p><?php echo $descricao ?></p>
 					</div>
 					
 					</div>
-					";
-
-			$conexao->close();
-
-			?>
+	
 		</div>
-	</div>
-	</div>
+		
 	</div>
 </body>

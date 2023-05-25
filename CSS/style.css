@@ -111,9 +111,13 @@ h1 {
 .display-flex{
   display: flex;
 }
+.justify-content-center{
+  justify-content: center;
+  gap: 10px;
+}
 .row-wrap{
   flex-flow: row wrap ;
-  justify-content: space-between ;
+  justify-content: space-evenly ;
   gap: 0.3rem;
 }
 .lista-admin{padding-inline: 2em;}
@@ -153,5 +157,5 @@ h1 {
     color: #888;
 }
 .livro-descricao{
-  width: 40%;
+  width: 500px;
 }

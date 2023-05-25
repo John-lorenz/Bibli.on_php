@@ -43,7 +43,7 @@
 		<a href="index.php"><img src="images/logobibli_claro.png"></a>
 		<h1> Página do admin</h1>
 		<div class="sub">
-                <form action="assets/adicionarLivro.php" method="post" enctype="multipart/form-data">
+                <form action="./assets/adicionarLivro.php" method="post" enctype="multipart/form-data">
 				<table class='demTable'>
 					<h1>adicionar livro</h1>
                         <thead>

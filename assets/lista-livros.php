@@ -14,7 +14,7 @@ if (isset($_GET['search'])) {
 	if ($resultado && mysqli_num_rows($resultado) > 0) {
 
 		while ($row = mysqli_fetch_assoc($resultado)) {
-			echo '<a class="a-livro" href="livro.php?id=' . $row["id"] . '&titulo=' . $row["titulo"] . '&autor=' . $row["autor"] . '&genero=' . $row["genero"] . '&linkImagem=' . $row["linkImagem"] . '&descricao='. $row['descricao'].'">';
+			echo '<a class="a-livro" href="livro.php?id=' . $row["id"].'">';
 			if (!empty($row["linkImagem"])) {
 				echo '<img src="' . $row["linkImagem"] . '" width="200px">';
 			} else {
@@ -31,11 +31,11 @@ if (isset($_GET['search'])) {
 	echo '<h1>Recomendações personalizadas</h1>';
 	echo'<div class="display-flex row-wrap" style="margin-top: 2em;width: 80%">';
 	$conexao = require __DIR__ . "/bancodedados.php";
-	$sql = "SELECT * FROM livros;";
+	$sql = "SELECT * FROM `livros` ORDER BY `livros`.`linkImagem` DESC";
 	$resultado = $conexao->query($sql);
 	if ($resultado) {
 		while ($row = mysqli_fetch_assoc($resultado)) {
-			echo '<a class="a-livro" href="livro.php?id=' . $row["id"] . '&titulo=' . $row["titulo"] . '&autor=' . $row["autor"] . '&genero=' . $row["genero"] . '&linkImagem=' . $row["linkImagem"] . '&descricao='. $row['descricao'].'">';
+			echo '<a class="a-livro" href="livro.php?id=' . $row["id"].'">';
 			if (!empty($row["linkImagem"])) {
 				echo '<img src="' . $row["linkImagem"] . '" width="200px">';
 			} else {

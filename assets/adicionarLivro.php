@@ -56,13 +56,13 @@ if (empty($titulo) || empty($autor)) {
   die('<script>if(confirm("Os dados não podem ser vazios!!!") == true) { window.location.replace("../admin_pagina.php"); } else {window.location.replace("../admin_pagina.php");}</script>');
 }
 // Insere os dados na tabela de usuários
-$sql = "INSERT INTO `biblioteca`.`livros` (`titulo`,`autor`,`genero`,`linkImagem`,`descricao`) VALUES ('$titulo', '$autor','$genero','$linkImagem','$descricao')";
+$sql = "INSERT INTO `biblioteca`.`livros` (`titulo`,`autor`,`genero`,`linkImagem`,`descricao`,`unidades`) VALUES ('$titulo', '$autor','$genero','$linkImagem','$descricao',1)";
 $resultado = $conexao->query($sql);
 
 // Verifica se houve erro na inserção
 if (!$resultado) {
   echo '<script> alert("Erro ao inserir os dados");</script>';
-  header('Location:admin_pagina.php');
+  header('Location:../admin_pagina.php');
 } else {
   echo '<script> if(confirm("Livro adicionado com sucesso") == true) { window.location.replace("../admin_pagina.php"); } else {window.location.replace("../admin_pagina.php");}</script>';
 }
