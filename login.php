@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -49,6 +50,9 @@
           if (!$verificaLogin) {
             die("Usuário ou senha inválidos");
           } else {
+            session_start();
+            $_SESSION['email'] = $email;
+
             header('Location: index.php');
           }
 

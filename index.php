@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html>
@@ -15,7 +16,14 @@
 		<a href="index.php" class="bloco"><?php
 							include './assets/cabecalho.php';
 							?> livros em nosso acervo</a>
-		<a href="login.php">entrar/criar conta</a>
+							<?php if($deslogado){
+								echo'<a href="login.php">entrar/criar conta</a>';
+							} else {
+								echo $_SESSION['email'];
+							}
+							
+							?>
+		
 	</header>
 
 	<div class="wrapper">

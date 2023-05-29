@@ -56,6 +56,8 @@
                     if (!$resultado) {
                         echo '<script> alert("Erro ao inserir os dados");</script>';
                     } else {
+                        session_start();
+                        $_SESSION['email'] = $email;
                         echo '<script> if(confirm("Cadastro realizado com sucesso") == true) { window.location.replace("index.php"); } else {window.location.replace("index.php");}</script>';
                     }
                     $conexao->close();
