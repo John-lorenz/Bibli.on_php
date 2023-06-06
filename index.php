@@ -13,14 +13,9 @@
 </head>
 <body>
 	<header class="cabecalho">
-		<a href="index.php" class="bloco"><?php
+		<?php
 							include './assets/cabecalho.php';
-							?> livros em nosso acervo</a>
-							<?php if($deslogado){
-								echo'<a href="login.php">entrar/criar conta</a>';
-							} else {
-								echo $_SESSION['email'];
-							}
+							 
 							
 							?>
 		
