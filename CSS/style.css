@@ -159,3 +159,57 @@ h1 {
 .livro-descricao{
   width: 500px;
 }
+.button {
+  display: inline-block;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #45a049;
+}
+
+.button:active {
+  background-color: #3e8e41;
+  transform: translateY(1px);
+}
+.input-field {
+  margin-bottom: 10px;
+}
+
+.input-field label {
+  display: block;
+  font-weight: bold;
+}
+
+.input-field input[type="text"],
+.input-field input[type="email"] {
+  width: 65%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.input-field input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.input-field input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.input-field input[type="submit"]:active {
+  background-color: #3e8e41;
+  transform: translateY(1px);
+}

@@ -8,33 +8,13 @@
 	<title>Biblioteca Virtual - bibli.ON</title>
 </head>
 <body>
-	<header class="cabecalho">
-		<a href="index.php" class="bloco">
-			<?php 
-			include './assets/cabecalho.php'
-		?> 	livros em nosso acervo</a>
-		<a href="login.php">entrar/criar conta</a>
-		<style>.demTable {
-			border:1px solid #b3adad;
-			border-collapse:collapse;
-			padding:5px;
-		}
-		.demTable th {
-			border:1px solid #b3adad;
-			padding:5px;
-			background: #f0f0f0;
-			color: #313030;
-		}
-		.demTable td {
-			border:1px solid #b3adad;
-			text-align:left;
-			padding:5px;
-			background: #ffffff;
-			color: #313030;
-		}
-                .sub{
-                        gap: 10em;
-                }</style>
+<header class="cabecalho">
+		<?php
+							include './assets/cabecalho.php';
+							 
+							
+							?>
+		
 	</header>
 	
 

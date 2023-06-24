@@ -6,9 +6,10 @@ $senha_db = 'root';
 $banco = 'biblioteca';
 $conexao = new mysqli($host, $usuario, $senha_db, $banco);
 
-if ($conexao->connect_errno) {
-    die('Erro ao conectar ao banco de dados: ' . $conexao->connect_errno);
+if ($conexao->connect_error) {
+    die('Erro de conexão com o banco de dados: ' . $conexao->connect_error);
 }
+
 $conexao->set_charset("utf8");
 
 return $conexao;

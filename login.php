@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -38,24 +37,29 @@
           $conexao = require __DIR__ . "/assets/bancodedados.php";
 
           $email = $conexao->real_escape_string($_POST['login_email']);
-          $senha = $conexao->real_escape_string(md5($_POST['login_senha']));
-
+          $senha = $conexao->real_escape_string($_POST['login_senha']);
 
           if ($conexao->connect_errno) {
             die('Erro ao conectar ao banco de dados: ' . $conexao->connect_errno);
           }
-          $sql = "SELECT * FROM usuarios WHERE email='$email' AND senha='$senha'";
-          $resultado = $conexao->query($sql);
-          $verificaLogin = $resultado->fetch_assoc();
-          if (!$verificaLogin) {
-            die("Usuário ou senha inválidos");
-          } else {
-            session_start();
-            $_SESSION['email'] = $email;
 
-            header('Location: index.php');
+          $sql = "SELECT * FROM usuarios WHERE email='$email'";
+          $resultado = $conexao->query($sql);
+
+          if ($resultado->num_rows === 0) {
+            die("Usuário ou senha inválidos");
           }
 
+          $usuario = $resultado->fetch_assoc();
+          $hashSenha = $usuario['senha'];
+
+          if (password_verify($senha, $hashSenha)) {
+            session_start();
+            $_SESSION['email'] = $email;
+            header('Location: index.php');
+          } else {
+            die("Usuário ou senha inválidos");
+          }
 
           $conexao->close();
         }
