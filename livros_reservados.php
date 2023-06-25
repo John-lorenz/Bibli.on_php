@@ -1,51 +1,103 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca Virtual - bibli.ON</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        tr:hover {background-color: #f5f5f5;}
+        
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        h2 {
+            color: #4CAF50;
+        }
+        
+        p {
+            color: #888;
+        }
+    </style>
 </head>
-
 <body>
-<header class="cabecalho">
-    <?php include './assets/cabecalho.php'; ?>
-</header>
+    <header class="cabecalho">
+        <?php include './assets/cabecalho.php'; ?>
+    </header>
 
-<div class="wrapper">
-    <a href="index.php"><img src="images/logobibli_claro.png"></a>
-    <div class="sub">
-        <h2>Livros Reservados</h2>
-        <?php
-        $conexao = require __DIR__ . "/assets/bancodedados.php";
-
-        $sql = "SELECT emprestimo.id, usuarios.nome as usuario, livros.titulo as livro, emprestimo.data_emprestimo, emprestimo.arquivado FROM emprestimo JOIN usuarios ON emprestimo.usuario = usuarios.id JOIN livros ON emprestimo.livro = livros.id";
-
-        $resultado = $conexao->query($sql);
-
-        if ($resultado) {
-            if ($resultado->num_rows > 0) {
-                echo "<table>";
-                echo "<tr><th>ID</th><th>Usuário</th><th>Livro</th><th>Data do Empréstimo</th><th>Arquivado</th></tr>";
-
-                while ($row = $resultado->fetch_assoc()) {
-                    echo "<tr><td>" . $row['id'] . "</td><td>" . $row['usuario'] . "</td><td>" . $row['livro'] . "</td><td>" . $row['data_emprestimo'] . "</td><td>" . $row['arquivado'] . "</td></tr>";
+    <div class="wrapper">
+        <a href="index.php"><img src="images/logobibli_claro.png"></a>
+        <div class="sub">
+            <h2>Livros Reservados</h2>
+            <?php
+            $conexao = require __DIR__ . "/assets/bancodedados.php";
+            
+            $sql = "SELECT e.*, l.titulo, l.autor, l.linkImagem
+                    FROM emprestimo e
+                    INNER JOIN livros l ON e.livro = l.id
+                    WHERE e.arquivado = 0";
+    
+            $result = $conexao->query($sql);
+    
+            if ($result->num_rows > 0) {
+         
+                echo "<table>
+                        <tr>
+                            <th>Livro</th>
+                            <th>Data de Empréstimo</th>
+                            <th>Capa</th>
+                            <th>Ação</th>
+                        </tr>";
+    
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>
+                            <td>" . $row["titulo"] . " - " . $row["autor"] . "</td>
+                            <td>" . $row["data_emprestimo"] . "</td>
+                            <td><img src='" . $row["linkImagem"] . "' width='100' height='150'></td>
+                            <td><button onclick=\"cancelarReserva(" . $row["id"] . ")\">Cancelar Reserva</button></td>
+                        </tr>";
                 }
-
+    
                 echo "</table>";
             } else {
-                echo "Nenhum livro reservado.";
+                echo "<p>Nenhum livro reservado no momento.</p>";
             }
-        } else {
-            echo "Erro na consulta: " . $conexao->error;
-        }
+    
+            // Fecha a conexão com o banco de dados
+            $conexao->close();
+            
+            ?>
 
-        $conexao->close();
-        ?>
+            <script>
+                function cancelarReserva(id) {
+                    if (confirm("Tem certeza de que deseja cancelar a reserva deste livro?")) {
+                        var xmlhttp = new XMLHttpRequest();
+                        xmlhttp.onreadystatechange = function() {
+                            if (this.readyState == 4 && this.status == 200) {
+                                // Exemplo de redirecionamento para a página atual após o cancelamento da reserva
+                                window.location.reload();
+                            }
+                        };
+                        xmlhttp.open("GET", "cancelar_reserva.php?id=" + id, true);
+                        xmlhttp.send();
+                    }
+                }
+            </script>
+        </div>
     </div>
-</div>
 </body>
-
 </html>
