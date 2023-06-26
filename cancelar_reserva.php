@@ -3,10 +3,10 @@ $conexao = require __DIR__ . "/assets/bancodedados.php";
 
 // Verifica se o ID foi fornecido
 if (isset($_GET["id"])) {
-    $id = $_GET["id"];
+    $genero_id = $_GET["id"];
 
     // Executa a consulta SQL para excluir o livro da tabela de empréstimo
-    $sql = "DELETE FROM emprestimo WHERE id = $id";
+    $sql = "DELETE FROM emprestimo WHERE genero_id = $genero_id";
 
     if ($conexao->query($sql) === TRUE) {
         // Ação executada com sucesso

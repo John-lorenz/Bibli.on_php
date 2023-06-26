@@ -32,6 +32,24 @@
         p {
             color: #888;
         }
+
+        .cancelar-button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .cancelar-button:hover {
+            background-color: #d32f2f;
+        }
     </style>
 </head>
 <body>
@@ -68,7 +86,8 @@
                             <td>" . $row["titulo"] . " - " . $row["autor"] . "</td>
                             <td>" . $row["data_emprestimo"] . "</td>
                             <td><img src='" . $row["linkImagem"] . "' width='100' height='150'></td>
-                            <td><button onclick=\"cancelarReserva(" . $row["id"] . ")\">Cancelar Reserva</button></td>
+                            <td><button class='cancelar-button' onclick=\"cancelarReserva(" . $row["genero_id"] . ")\">Cancelar Reserva</button></td>
+
                         </tr>";
                 }
     
