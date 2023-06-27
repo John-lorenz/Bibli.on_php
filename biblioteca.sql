@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 25-Maio-2023 às 15:16
+-- Generation Time: 27-Jun-2023 às 21:23
 -- Versão do servidor: 5.7.11
--- PHP Version: 7.0.3
+-- PHP Version: 5.6.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -27,19 +27,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `emprestimo` (
-  `id` int(11) NOT NULL,
-  `livro` varchar(100) NOT NULL,
-  `data_emprestimo` date NOT NULL,
-  `usuario` varchar(50) NOT NULL,
-  `arquivado` tinyint(1) NOT NULL
+  `genero_id` int(11) NOT NULL,
+  `livro` int(11) DEFAULT NULL,
+  `data_emprestimo` date DEFAULT NULL,
+  `usuario` int(11) DEFAULT NULL,
+  `arquivado` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `emprestimo`
---
-
-INSERT INTO `emprestimo` (`id`, `livro`, `data_emprestimo`, `usuario`, `arquivado`) VALUES
-(1, '1984', '2023-05-17', '12', 0);
 
 -- --------------------------------------------------------
 
@@ -99,10 +92,10 @@ CREATE TABLE `livros` (
 
 INSERT INTO `livros` (`id`, `titulo`, `autor`, `genero`, `descricao`, `linkImagem`, `unidades`) VALUES
 (1, 'Orgulho e Preconceito', 'Jane Austen', 'Romance', 'ere', 'images/uploads/orgulhoreconceito.jpg', 2),
-(13, 'Vidas Secas', 'Graciliano Ramos', 'Romance', '', 'images/uploads/vidassecas.jpg', 2),
+(13, 'Vidas Secas', 'Graciliano Ramos', 'Romance', '', 'images/uploads/vidassecas.jpg', 1),
 (14, 'O Pequeno Príncipe', 'Antoine de Saint-Exupéry', 'Ficção Científica', '', 'images/uploads/opequenoprincipe.jpg', 3),
 (27, 'O Morro dos Ventos Uivantes', 'Emily Bronte', 'Romance', '', 'images/uploads/morrodosventosuivantes.jpg', 2),
-(28, 'Razão e Sensibilidade', 'Jane Austen', 'Romance', '', 'images/uploads/razaosensibilidade.jpg', 3),
+(28, 'Razão e Sensibilidade', 'Jane Austen', 'Romance', '', 'images/uploads/razaosensibilidade.jpg', 2),
 (29, 'Anna Karenina', 'Lev Tolstói', 'Romance', '', 'images/uploads/annakarienina.jpg', 2),
 (30, 'O Grande Gatsby', 'F. Scott Fitzgerald', 'Romance', '', 'images/uploads/ograndegatsby.jpg', 3),
 (31, 'Cem Anos de Solidão', 'Gabriel Garcia Marquez', 'Romance', '', 'images/uploads/cemanos.jpg', 2),
@@ -126,11 +119,11 @@ INSERT INTO `livros` (`id`, `titulo`, `autor`, `genero`, `descricao`, `linkImage
 (57, 'Harry Potter e a Pedra Filosofal', 'J.K. Rowling', 'Romance', '', 'images/uploads/harrypoter1.jpg', 2),
 (58, 'As Crônicas de Nárnia', 'C.S. Lewis', 'Romance', '', 'images/uploads/narnia.jpg', 3),
 (59, 'O Nome do Vento', 'Patrick Rothfuss', 'Romance', '', 'images/uploads/onomedovento.jpg', 2),
-(60, 'A Roda do Tempo', 'Robert Jordan', 'Romance', '', 'images/uploads/rodadotempo.jpg', 3),
-(61, 'O Último Desejo', 'Andrzej Sapkowski', 'Romance', '', 'images/uploads/ultimodesejo.jpg', 2),
+(60, 'A Roda do Tempo', 'Robert Jordan', 'Romance', '', 'images/uploads/rodadotempo.jpg', 0),
+(61, 'O Último Desejo', 'Andrzej Sapkowski', 'Romance', '', 'images/uploads/ultimodesejo.jpg', 0),
 (62, 'A Torre Negra', 'Stephen King', 'Romance', '', 'images/uploads/atorrenegra.jpg', 3),
 (63, 'A Dança dos Dragões', 'George R.R. Martin', 'Romance', '', 'images/uploads/adancadosladroes.jpg', 2),
-(64, 'O Príncipe de Westeros e Outras Histórias', 'George R.R. Martin', 'Romance', '', 'images/uploads/oprincipedewesteros.jpg', 3),
+(64, 'O Príncipe de Westeros e Outras Histórias', 'George R.R. Martin', 'Romance', '', 'images/uploads/oprincipedewesteros.jpg', 2),
 (65, 'A Batalha do Apocalipse', 'Eduardo Spohr', 'Romance', '', 'images/uploads/abatalhadoapocalipse.jpg', 2),
 (66, 'Os Lusíadas', 'Luís de Camões', 'Romance', '', 'images/uploads/oslusiadas.jpg', 3),
 (67, 'Divina Comédia', 'Dante Alighieri', 'Poesia', '', '', 2),
@@ -184,7 +177,7 @@ INSERT INTO `livros` (`id`, `titulo`, `autor`, `genero`, `descricao`, `linkImage
 (115, 'Faça Fortuna com Ações Antes que seja Tarde', 'Décio Bazin', 'Negócios e Finanças', '', '', 2),
 (116, 'A Mentalidade do Investidor de Sucesso', 'João Kepler', 'Negócios e Finanças', '', '', 3),
 (117, 'O Jeito Harvard de Ser Feliz', 'Shawn Achor', 'Negócios e Finanças', '', '', 2),
-(119, '1984', 'George Orwell', 'Ficção Científica', 'Publicada originalmente em 1949, a distopia futurista 1984 é um dos romances mais influentes do século XX, um inquestionável clássico moderno. Lançada poucos meses antes da morte do autor, é uma obra magistral que ainda se impõe como uma poderosa reflexão ficcional sobre a essência nefasta de qualquer forma de poder totalitário.', 'images/uploads/1984.jpg', 2);
+(119, '1984', 'George Orwell', 'Ficção Científica', 'Publicada originalmente em 1949, a distopia futurista 1984 é um dos romances mais influentes do século XX, um inquestionável clássico moderno. Lançada poucos meses antes da morte do autor, é uma obra magistral que ainda se impõe como uma poderosa reflexão ficcional sobre a essência nefasta de qualquer forma de poder totalitário.', 'images/uploads/1984.jpg', 43);
 
 -- --------------------------------------------------------
 
@@ -197,18 +190,18 @@ CREATE TABLE `usuarios` (
   `nome` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `senha` char(60) NOT NULL,
-  `usuario-ativo` tinyint(1) NOT NULL,
-  `admin` tinyint(1) NOT NULL
+  `tipo_conta` enum('admin','normal') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `usuario-ativo`, `admin`) VALUES
-(12, 'arthur', 'teste@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 1, 0),
-(14, 'vitor', 'a@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 1, 0),
-(17, 'arthur', 'maicon@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 1, 0);
+INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `tipo_conta`) VALUES
+(20, 'teste', 'teste@gmail.com', '$2y$10$9ODQBxad5Cb780.vkoLqQeugYlwFv24EpdAmuLdJ6RdFv/hQ04V9S', NULL),
+(21, 'joao', 'joao@gmail.com', '$2y$10$teCyLXQ45dvTUYBHwf27IeQyN8fGx9SiqxNtG1/9ylrhv0x1Bfx7W', NULL),
+(22, 'joao', 'adadadad@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL),
+(23, 'admin', 'admin@gmail.com', '$2y$10$Jmv18ydpMXVQJkbv/a6TBeCmLUVosYqtzdm2MLRTFq2neQG45wniO', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -218,7 +211,8 @@ INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `usuario-ativo`, `admin`
 -- Indexes for table `emprestimo`
 --
 ALTER TABLE `emprestimo`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`genero_id`),
+  ADD KEY `livro` (`livro`);
 
 --
 -- Indexes for table `generos`
@@ -249,7 +243,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `emprestimo`
 --
 ALTER TABLE `emprestimo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `genero_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `livros`
 --
@@ -259,7 +253,17 @@ ALTER TABLE `livros`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Limitadores para a tabela `emprestimo`
+--
+ALTER TABLE `emprestimo`
+  ADD CONSTRAINT `emprestimo_ibfk_1` FOREIGN KEY (`livro`) REFERENCES `livros` (`id`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
