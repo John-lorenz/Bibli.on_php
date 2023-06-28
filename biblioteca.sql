@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 27-Jun-2023 às 21:23
+-- Generation Time: 28-Jun-2023 às 12:01
 -- Versão do servidor: 5.7.11
 -- PHP Version: 5.6.18
 
@@ -27,11 +27,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `emprestimo` (
-  `genero_id` int(11) NOT NULL,
-  `livro` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `id_livro` int(11) DEFAULT NULL,
   `data_emprestimo` date DEFAULT NULL,
-  `usuario` int(11) DEFAULT NULL,
-  `arquivado` tinyint(4) DEFAULT NULL
+  `arquivado` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -92,7 +92,7 @@ CREATE TABLE `livros` (
 
 INSERT INTO `livros` (`id`, `titulo`, `autor`, `genero`, `descricao`, `linkImagem`, `unidades`) VALUES
 (1, 'Orgulho e Preconceito', 'Jane Austen', 'Romance', 'ere', 'images/uploads/orgulhoreconceito.jpg', 2),
-(13, 'Vidas Secas', 'Graciliano Ramos', 'Romance', '', 'images/uploads/vidassecas.jpg', 1),
+(13, 'Vidas Secas', 'Graciliano Ramos', 'Romance', '', 'images/uploads/vidassecas.jpg', 0),
 (14, 'O Pequeno Príncipe', 'Antoine de Saint-Exupéry', 'Ficção Científica', '', 'images/uploads/opequenoprincipe.jpg', 3),
 (27, 'O Morro dos Ventos Uivantes', 'Emily Bronte', 'Romance', '', 'images/uploads/morrodosventosuivantes.jpg', 2),
 (28, 'Razão e Sensibilidade', 'Jane Austen', 'Romance', '', 'images/uploads/razaosensibilidade.jpg', 2),
@@ -106,10 +106,10 @@ INSERT INTO `livros` (`id`, `titulo`, `autor`, `genero`, `descricao`, `linkImage
 (44, 'As Pontes de Madison', 'Robert James Waller', 'Romance', '', 'images/uploads/aspontesdemadinson.jpg', 3),
 (45, 'A Montanha Mágica', 'Thomas Mann', 'Romance', '', 'images/uploads/amontanhamagica.jpg', 2),
 (46, 'Fundação', 'Isaac Asimov', 'Ficção Científica', '', 'images/uploads/fundacao.png', 3),
-(47, 'O Guia do Mochileiro das Galáxias', 'Douglas Adams', 'Ficção Científica', '', 'images/uploads/mochileirodasgalaxias.jpg', 2),
+(47, 'O Guia do Mochileiro das Galáxias', 'Douglas Adams', 'Ficção Científica', '', 'images/uploads/mochileirodasgalaxias.jpg', 0),
 (48, '2001: Uma Odisseia no Espaço', 'Arthur C. Clarke', 'Ficção Científica', '', 'images/uploads/2001umaodisseia.jpg', 3),
 (49, 'O Fim da Eternidade', 'Isaac Asimov', 'Romance', '', 'images/uploads/ofimdaeternidade.jpg', 2),
-(50, 'Eu, Robô', 'Isaac Asimov', 'Ficção Científica', '', 'images/uploads/eurobo.jpg', 3),
+(50, 'Eu, Robô', 'Isaac Asimov', 'Ficção Científica', '', 'images/uploads/eurobo.jpg', 2),
 (51, 'A Máquina do Tempo', 'H.G. Wells', 'Ficção Científica', '', 'images/uploads/amaquinadotempo.jpg', 2),
 (52, 'Neuromancer', 'William Gibson', 'Ficção Científica', '', 'images/uploads/neuromancer.jpg', 3),
 (53, 'Eu Sou a Lenda', 'Richard Matheson', 'Ficção Científica', '', 'images/uploads/eusoualenda.jpg', 2),
@@ -117,7 +117,7 @@ INSERT INTO `livros` (`id`, `titulo`, `autor`, `genero`, `descricao`, `linkImage
 (55, 'Jogador Número 1', 'Ernest Cline', 'Ficção Científica', '', 'images/uploads/jogadorn1.jpg', 2),
 (56, 'O Senhor dos Anéis - A sociedade do anel', 'J.R.R. Tolkien', 'Romance', '', 'images/uploads/asociedadedoanel.jpg', 3),
 (57, 'Harry Potter e a Pedra Filosofal', 'J.K. Rowling', 'Romance', '', 'images/uploads/harrypoter1.jpg', 2),
-(58, 'As Crônicas de Nárnia', 'C.S. Lewis', 'Romance', '', 'images/uploads/narnia.jpg', 3),
+(58, 'As Crônicas de Nárnia', 'C.S. Lewis', 'Romance', '', 'images/uploads/narnia.jpg', 2),
 (59, 'O Nome do Vento', 'Patrick Rothfuss', 'Romance', '', 'images/uploads/onomedovento.jpg', 2),
 (60, 'A Roda do Tempo', 'Robert Jordan', 'Romance', '', 'images/uploads/rodadotempo.jpg', 0),
 (61, 'O Último Desejo', 'Andrzej Sapkowski', 'Romance', '', 'images/uploads/ultimodesejo.jpg', 0),
@@ -186,22 +186,18 @@ INSERT INTO `livros` (`id`, `titulo`, `autor`, `genero`, `descricao`, `linkImage
 --
 
 CREATE TABLE `usuarios` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `nome` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `senha` char(60) NOT NULL,
-  `tipo_conta` enum('admin','normal') DEFAULT NULL
+  `id` int(11) NOT NULL,
+  `nome` varchar(50) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `senha` varchar(225) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `tipo_conta`) VALUES
-(20, 'teste', 'teste@gmail.com', '$2y$10$9ODQBxad5Cb780.vkoLqQeugYlwFv24EpdAmuLdJ6RdFv/hQ04V9S', NULL),
-(21, 'joao', 'joao@gmail.com', '$2y$10$teCyLXQ45dvTUYBHwf27IeQyN8fGx9SiqxNtG1/9ylrhv0x1Bfx7W', NULL),
-(22, 'joao', 'adadadad@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', NULL),
-(23, 'admin', 'admin@gmail.com', '$2y$10$Jmv18ydpMXVQJkbv/a6TBeCmLUVosYqtzdm2MLRTFq2neQG45wniO', 'admin');
+INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`) VALUES
+(1, 'joao', 'joao@gmail.com', '$2y$10$6c3/HwWidKFyUW3OgHTPGe4tmMekIjxRX7aYFEZ81XXOPn0qHqUvm');
 
 --
 -- Indexes for dumped tables
@@ -211,8 +207,9 @@ INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `tipo_conta`) VALUES
 -- Indexes for table `emprestimo`
 --
 ALTER TABLE `emprestimo`
-  ADD PRIMARY KEY (`genero_id`),
-  ADD KEY `livro` (`livro`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_livro` (`id_livro`);
 
 --
 -- Indexes for table `generos`
@@ -232,8 +229,7 @@ ALTER TABLE `livros`
 -- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -243,7 +239,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `emprestimo`
 --
 ALTER TABLE `emprestimo`
-  MODIFY `genero_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `livros`
 --
@@ -253,7 +249,7 @@ ALTER TABLE `livros`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Constraints for dumped tables
 --
@@ -262,7 +258,8 @@ ALTER TABLE `usuarios`
 -- Limitadores para a tabela `emprestimo`
 --
 ALTER TABLE `emprestimo`
-  ADD CONSTRAINT `emprestimo_ibfk_1` FOREIGN KEY (`livro`) REFERENCES `livros` (`id`);
+  ADD CONSTRAINT `emprestimo_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`),
+  ADD CONSTRAINT `emprestimo_ibfk_2` FOREIGN KEY (`id_livro`) REFERENCES `livros` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -85,10 +85,16 @@
                     echo "<tr>
                             <td>" . $row["titulo"] . " - " . $row["autor"] . "</td>
                             <td>" . $row["data_emprestimo"] . "</td>
-                            <td><img src='" . $row["linkImagem"] . "' width='100' height='150'></td>
-                            <td><button class='cancelar-button' onclick=\"cancelarReserva(" . $row["genero_id"] . ")\">Cancelar Reserva</button></td>
+                            <td><img src='" . $row["linkImagem"] . "' width='100' height='150'></td>";
 
-                        </tr>";
+                    // Verifique se a propriedade "id" existe antes de usá-la
+                    if (isset($row["id"])) {
+                        echo "<td><button class='cancelar-button' onclick=\"cancelarReserva(" . $row["id"] . ")\">Cancelar Reserva</button></td>";
+                    } else {
+                        echo "<td>Erro: ID de reserva não encontrado</td>";
+                    }
+
+                    echo "</tr>";
                 }
     
                 echo "</table>";
