@@ -66,7 +66,7 @@
             
             $sql = "SELECT e.*, l.titulo, l.autor, l.linkImagem
                     FROM emprestimo e
-                    INNER JOIN livros l ON e.livro = l.id
+                    INNER JOIN livros l ON e.id_livro = l.id
                     WHERE e.arquivado = 0";
     
             $result = $conexao->query($sql);

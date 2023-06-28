@@ -14,8 +14,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $unidadesDisponiveis = $livroRow['unidades'];
 
     if ($unidadesDisponiveis > 0) {
-        // Faça a reserva - você precisa adicionar a lógica adequada para inserir os dados no banco de dados
-        $reservaSql = "INSERT INTO emprestimo (livro, data_emprestimo, usuario, arquivado) VALUES ('$livroId', NOW(), 1, 0)";
+        // Obtenha o ID do usuário com base no email fornecido
+        $usuarioSql = "SELECT id FROM usuarios WHERE email = '$email'";
+        $usuarioResultado = $conexao->query($usuarioSql);
+        $usuarioRow = mysqli_fetch_assoc($usuarioResultado);
+        $usuarioId = $usuarioRow['id'];
+
+        // Faça a reserva - insira os dados do usuário associado à reserva
+        $reservaSql = "INSERT INTO emprestimo (id_usuario, id_livro, data_emprestimo, arquivado) VALUES ($usuarioId, $livroId, NOW(), 0)";
         $conexao->query($reservaSql);
 
         // Atualize o número de unidades disponíveis

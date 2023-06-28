@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -8,7 +7,6 @@
     <link rel="stylesheet" href="css/style.css" />
     <title>Signup - Bibli.ON</title>
 </head>
-
 <body class="imagem">
     <div style="display: flex; margin-top: 10em;">
         <div class="bemVindo">
@@ -27,14 +25,14 @@
                     <a href="login.php" class="botao criar-conta">Já tenho uma conta</a>
                 </div>
                 <?php
-                if (isset($_POST['register'])) {
+                if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     require_once __DIR__ . "/assets/bancodedados.php";
 
                     // Capturar os dados do formulário
-                    $nome = $_POST['register_nome'];
-                    $email = $_POST['register_email'];
-                    $senha = $_POST['register_senha'];
-                    $confirmarSenha = $_POST['confirmar_senha'];
+                    $nome = $conexao->real_escape_string($_POST['register_nome']);
+                    $email = $conexao->real_escape_string($_POST['register_email']);
+                    $senha = $conexao->real_escape_string($_POST['register_senha']);
+                    $confirmarSenha = $conexao->real_escape_string($_POST['confirmar_senha']);
 
                     // Verificar se todos os campos estão preenchidos
                     if (empty($nome) || empty($email) || empty($senha) || empty($confirmarSenha)) {
@@ -42,15 +40,15 @@
                     }
 
                     // Verificar se as senhas coincidem
-                    if ($senha != $confirmarSenha) {
+                    if ($senha !== $confirmarSenha) {
                         die("As senhas não estão iguais");
                     }
 
                     // Verificar se o usuário já está cadastrado
-                    $sql = "SELECT * FROM usuarios WHERE email='$email'";
-                    $resultado = $conexao->query($sql);
+                    $verificarSql = "SELECT * FROM usuarios WHERE email = '$email'";
+                    $verificarResultado = $conexao->query($verificarSql);
 
-                    if ($resultado->num_rows > 0) {
+                    if ($verificarResultado->num_rows > 0) {
                         die("O email já está cadastrado");
                     }
 
@@ -58,21 +56,22 @@
                     $hashSenha = password_hash($senha, PASSWORD_DEFAULT);
 
                     // Inserir os dados do usuário no banco de dados
-                    $sql = "INSERT INTO usuarios (nome, email, senha) VALUES ('$nome', '$email', '$hashSenha')";
-                    $resultado = $conexao->query($sql);
+                    $inserirSql = "INSERT INTO usuarios (nome, email, senha) VALUES ('$nome', '$email', '$hashSenha')";
+                    $inserirResultado = $conexao->query($inserirSql);
 
-                    if (!$resultado) {
-                        die("Erro ao inserir os dados: " . $conexao->error);
+                    if (!$inserirResultado) {
+                        die("Erro ao inserir os dados do usuário: " . $conexao->error);
                     }
 
                     // Recuperar o ID do usuário inserido
                     $usuarioId = $conexao->insert_id;
 
-                    // Inserir os dados do usuário na tabela de livros (como um exemplo)
-                    $sql = "INSERT INTO livros (usuario_id, titulo, autor) VALUES ('$usuarioId', 'Exemplo de Livro', 'Autor do Exemplo')";
-                    $resultado = $conexao->query($sql);
+                    // Inserir os dados do usuário na tabela de livros (como exemplo)
+                    $inserirLivroSql = "INSERT INTO livros (usuario_id, titulo, autor, genero, descricao) VALUES ('$usuarioId', 'Exemplo de Livro', 'Autor do Exemplo', 'Gênero do Exemplo', 'Descricao de exemplo')";
 
-                    if (!$resultado) {
+                    $inserirLivroResultado = $conexao->query($inserirLivroSql);
+
+                    if (!$inserirLivroResultado) {
                         die("Erro ao inserir os dados do livro: " . $conexao->error);
                     }
 
@@ -85,10 +84,8 @@
                     echo '<script> if(confirm("Cadastro realizado com sucesso") == true) { window.location.replace("index.php"); } else {window.location.replace("index.php");}</script>';
                 }
                 ?>
-
             </form>
         </div>
     </div>
 </body>
-
 </html>
